@@ -18,6 +18,10 @@ public class ReadStoryData {
     private static Map<String, List<String>> choicesMap;
     private static Map<String, List<String>> scenesMap;
 
+    /**
+     * 读取lifeline内容
+     * @return
+     */
     public static boolean readStoryDate() {
         try {
             StringBuffer scenesBuff = new StringBuffer();
