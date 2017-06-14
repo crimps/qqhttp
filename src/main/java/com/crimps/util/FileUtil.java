@@ -1,6 +1,9 @@
 package com.crimps.util;
 
+import com.alibaba.fastjson.JSON;
+
 import java.io.*;
+import java.util.Map;
 
 /**
  * Created by crimps on 2017/6/13.
@@ -43,4 +46,18 @@ public class FileUtil {
         reader.close();
         is.close();
     }
+
+    /**
+     * 将文本内容转以map格式
+     * @param filePath 文件路径
+     * @return
+     * @throws IOException
+     */
+    public static Map<String, String> readToMap(String filePath) throws IOException {
+        StringBuffer sb = new StringBuffer();
+        readToBuffer(sb, filePath);
+        return (Map<String, String>) JSON.parse(sb.toString());
+    }
+
+
 }
