@@ -1,7 +1,7 @@
 package com.crimps.dto;
 
 /**
- * Created by xmcares on 2017/6/13.
+ * Created by crimps on 2017/6/13.
  */
 public class ReplyDTO {
 //    {"return_code":0,"return_message":"aaa","appver":0,"update_url":"","return_type":104}

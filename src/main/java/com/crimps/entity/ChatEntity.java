@@ -1,7 +1,7 @@
 package com.crimps.entity;
 
 /**
- * Created by xmcares on 2017/6/13.
+ * Created by crimps on 2017/6/13.
  */
 public class ChatEntity {
 //    GET /webapp/p2015cq/api.php?
