@@ -1,7 +1,7 @@
 package com.crimps.util;
 
 /**
- * Created by xmcares on 2017/6/13.
+ * Created by crimps on 2017/6/13.
  */
 public class FileUtilTest {
     @org.junit.Test
