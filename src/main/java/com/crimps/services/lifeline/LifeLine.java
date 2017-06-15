@@ -11,9 +11,13 @@ public class LifeLine {
      */
     public String process(String content) {
         //读取游戏进度
+
         //当前内容与游戏进底是否匹配
+
         //游戏进度处理
+
         //记录游戏进度
+
         //返回内容
         return null;
     }

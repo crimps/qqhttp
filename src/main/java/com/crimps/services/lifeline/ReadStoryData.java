@@ -8,15 +8,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.alibaba.fastjson.JSON.parse;
-
 /**
  * Created by crimps on 2017/6/14.
  */
 public class ReadStoryData {
     private static final String FILE_DIR = "lifeLineStoryData";
-    private static final String FILE_SCENES = FILE_DIR + File.separator + "lifeLineStoryData/scenes_cn.json";
-    private static final String FILE_CHOICES = FILE_DIR + File.separator + "lifeLineStoryData/choices_cn.json";
+    private static final String FILE_SCENES = FILE_DIR + File.separator + "scenes_cn.json";
+    private static final String FILE_CHOICES = FILE_DIR + File.separator + "choices_cn.json";
     private static final String FILE_PROCESS = FILE_DIR + File.separator + "GameProgress.json";
     private static final String FILE_PARAMETER = FILE_DIR + File.separator + "GameParameters.json";
 
@@ -55,6 +53,19 @@ public class ReadStoryData {
         return gameProgressMap;
     }
 
+    /**
+     * 写入lifeline游戏进度
+     * @param content 文本内容
+     * @return
+     */
+    public static boolean writeGameProgress(String content) {
+        return FileUtil.writeToFile(content, FILE_PROCESS);
+    }
+
+    /**
+     * 读取游戏参数
+     * @return
+     */
     public static Map<String, String> readGameParameter() {
         Map<String, String> gameParameterMap = new HashMap<String, String>();
         try {
@@ -65,4 +76,12 @@ public class ReadStoryData {
         return gameParameterMap;
     }
 
+    /**
+     * 写入lifeline游戏参数
+     * @param content 文本内容
+     * @return
+     */
+    public static boolean writeGameParameter(String content) {
+        return FileUtil.writeToFile(content, FILE_PARAMETER);
+    }
 }

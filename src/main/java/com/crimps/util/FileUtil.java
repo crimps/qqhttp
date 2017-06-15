@@ -59,5 +59,21 @@ public class FileUtil {
         return (Map<String, String>) JSON.parse(sb.toString());
     }
 
-
+    /**
+     * 将文本内容写入文件：覆盖写
+     * @param content 文本内容
+     * @param filePath 文件路径
+     */
+    public static boolean writeToFile(String content, String filePath) {
+        boolean flag = false;
+        try {
+            File file = new File(filePath);
+            PrintStream ps = new PrintStream(new FileOutputStream(file));
+            // 往文件里写入字符串
+            ps.println(content);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return flag;
+    }
 }

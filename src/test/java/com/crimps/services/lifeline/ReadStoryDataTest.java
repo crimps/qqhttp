@@ -13,7 +13,7 @@ import static com.alibaba.fastjson.JSON.parse;
  */
 public class ReadStoryDataTest {
     @Test
-    public void readStoryDate() throws Exception {
+    public void testReadStoryDate() throws Exception {
         StringBuffer scenesBuff = new StringBuffer();
         StringBuffer choicesBuff = new StringBuffer();
         FileUtil.readToBuffer(scenesBuff, "D:\\IdeaProjects\\qqhttp\\src\\main\\resources\\lifeLineStoryData\\scenes_cn.json");
@@ -21,5 +21,6 @@ public class ReadStoryDataTest {
         Map<String, List<String>> scenesMap = (Map<String, List<String>>)parse(scenesBuff.toString());
         System.out.println("dfdf");
     }
+
 
 }
