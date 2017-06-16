@@ -34,9 +34,10 @@ public class FileUtil {
      * @throws IOException 异常
      */
     public static void readToBuffer(StringBuffer buffer, String filePath) throws IOException {
-        InputStream is = new FileInputStream(filePath);
+        InputStream is = Thread.currentThread().getContextClassLoader().getResourceAsStream(filePath);
         String line; // 用来保存每行读取的内容
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(is), "UTF-8");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(Thread.currentThread().getContextClassLoader().getResourceAsStream(filePath), "utf8"));
         line = reader.readLine(); // 读取第一行
         while (line != null) { // 如果 line 为空说明读完了
             buffer.append(line); // 将读到的内容添加到 buffer 中
@@ -75,5 +76,33 @@ public class FileUtil {
             e.printStackTrace();
         }
         return flag;
+    }
+
+    /**
+     * utf-8 转unicode
+     *
+     * @param inStr
+     * @return String
+     */
+    public static String utf8ToUnicode(String inStr) {
+        char[] myBuffer = inStr.toCharArray();
+
+        StringBuffer sb = new StringBuffer();
+        for (int i = 0; i < inStr.length(); i++) {
+            Character.UnicodeBlock ub = Character.UnicodeBlock.of(myBuffer[i]);
+            if (ub == Character.UnicodeBlock.BASIC_LATIN) {
+                sb.append(myBuffer[i]);
+            } else if (ub == Character.UnicodeBlock.HALFWIDTH_AND_FULLWIDTH_FORMS) {
+                int j = (int) myBuffer[i] - 65248;
+                sb.append((char) j);
+            } else {
+                short s = (short) myBuffer[i];
+                String hexS = Integer.toHexString(s);
+                hexS = hexS.replaceAll("ffff", "");
+                String unicode = "\\u" + hexS;
+                sb.append(unicode.toLowerCase());
+            }
+        }
+        return sb.toString();
     }
 }

@@ -1,6 +1,5 @@
 package com.crimps.services.lifeline;
 
-import com.alibaba.fastjson.JSON;
 import com.crimps.util.FileUtil;
 
 import java.io.File;
@@ -8,18 +7,27 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.alibaba.fastjson.JSON.parse;
+
 /**
  * Created by crimps on 2017/6/14.
  */
 public class ReadStoryData {
+    //    private static final String FILE_DIR = "D:\\IdeaProjects\\qqhttp\\src\\main\\resources\\lifeLineStoryData";
     private static final String FILE_DIR = "lifeLineStoryData";
     private static final String FILE_SCENES = FILE_DIR + File.separator + "scenes_cn.json";
     private static final String FILE_CHOICES = FILE_DIR + File.separator + "choices_cn.json";
     private static final String FILE_PROCESS = FILE_DIR + File.separator + "GameProgress.json";
     private static final String FILE_PARAMETER = FILE_DIR + File.separator + "GameParameters.json";
 
-    private static Map<String, List<String>> choicesMap;
-    private static Map<String, List<String>> scenesMap;
+    public static final String PROCESS_BLOCK = "gameBlock"; //游戏当前进度区块
+    public static final String PROCESS_TIME = "time"; //游戏当前进度到达区块时间
+    private static final String CHOICE_ID = "identifier";
+    private static final String CHOICE_ACTION = "actions";
+    private static final String CHOICE_CONTENT = "choice";
+
+    public static Map<String, Map<String, String>> choicesMap;
+    public static Map<String, List<String>> scenesMap;
 
     /**
      * 读取lifeline游戏内容
@@ -31,10 +39,22 @@ public class ReadStoryData {
             StringBuffer choicesBuff = new StringBuffer();
             FileUtil.readToBuffer(scenesBuff, FILE_SCENES);
             FileUtil.readToBuffer(choicesBuff, FILE_CHOICES);
-            scenesMap = (Map<String, List<String>>) JSON.parse(scenesBuff.toString());
-            choicesMap = (Map<String, List<String>>) JSON.parse(choicesBuff.toString());
+            scenesMap = (Map<String, List<String>>)parse(scenesBuff.toString());
+            choicesMap = new HashMap<String, Map<String, String>>();
+            List<Object> choicesList = (List<Object>)parse(choicesBuff.toString());
+            for (Object choice : choicesList) {
+                Map<String, Object> map = (Map<String, Object>)choice;
+                String id = (String) map.get(CHOICE_ID);
+                List<Map<String, String>> kMap = (List<Map<String,String>>)map.get(CHOICE_ACTION);
+                Map<String, String> choiceMap = new HashMap<String, String>();
+                for (Map<String, String> tempMap : kMap) {
+                    choiceMap.put(tempMap.get(CHOICE_ID), tempMap.get(CHOICE_CONTENT));
+                }
+                choicesMap.put(id, choiceMap);
+            }
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
     }

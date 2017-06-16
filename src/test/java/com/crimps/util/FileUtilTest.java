@@ -34,4 +34,12 @@ public class FileUtilTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void testUtf8ToUnicode() {
+//        String str = "[正在建立连接]";
+//        System.out.println(FileUtil.utf8ToUnicode(str));
+        String str1 = "连";
+        System.out.println(FileUtil.utf8ToUnicode(str1));
+    }
 }
