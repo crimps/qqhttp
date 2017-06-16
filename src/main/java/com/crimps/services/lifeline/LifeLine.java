@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by xmcares on 2017/6/14.
+ * Created by crimps on 2017/6/14.
  */
 public class LifeLine {
     /**
@@ -28,7 +28,7 @@ public class LifeLine {
         List<String> scenesList = ReadStoryData.scenesMap.get(progressBlock);
         StringBuffer sb = new StringBuffer("");
         for (String scene : scenesList) {
-            sb.append(scene);
+            sb.append(scene).append("\\r\\n");
         }
         //记录游戏进度
 

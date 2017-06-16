@@ -3,7 +3,7 @@ package com.crimps.services.lifeline;
 import org.junit.Test;
 
 /**
- * Created by xmcares on 2017/6/15.
+ * Created by crimps on 2017/6/15.
  */
 public class LifeLineTest {
     @Test
@@ -13,5 +13,4 @@ public class LifeLineTest {
         String s = lifeLine.process(content);
         System.out.println(s);
     }
-
 }
